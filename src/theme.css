@@ -555,6 +555,16 @@ table { color: var(--muted); }
   .hamburger { display: none; }
 }
 
+/* Broader visibility for hamburger on tablets/phones: override later so it's easy to test
+   This ensures the hamburger is visible up to 992px width and gives it a subtle
+   semi-opaque background to remain visible against any header color. */
+@media (max-width: 992px) {
+  .desktop { display: none !important; }
+  .hamburger { display: inline-flex !important; color: #ffffff; background: rgba(0,0,0,0.12); }
+  .hamburger:hover { background: rgba(0,0,0,0.16); }
+  .hamburger .bar { background: #fff !important; }
+}
+
 @media (max-width: 480px) {
   .header .container { padding: 0 12px; }
   .logo { font-size: 15px; }
