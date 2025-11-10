@@ -1,0 +1,570 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+
+:root {
+  --bg: #ffffff; /* white background */
+  --header-height: 64px;
+  --panel: rgba(255,255,255,0.7); /* translucent panel for glass look */
+  --muted: rgba(0,0,0,0.6);
+  --text: #0a0a0a; /* near-black text */
+  --accent: #0a0a0a;
+  --glass-border: rgba(0,0,0,0.06);
+  --radius: 14px;
+  --card-shadow: 0 8px 30px rgba(10,10,10,0.06);
+}
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0; /* remove default browser margin to avoid gaps */
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+/* Header */
+.header { background: #000000; position: sticky; top: 0; z-index: 60; padding: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.header .container { display:flex; align-items:center; justify-content:space-between; }
+.logo { color: #ffffff; font-weight:700; letter-spacing: -0.3px; }
+.nav a { color: rgba(255,255,255,0.92); font-weight:500; padding:6px 10px; border-radius:8px; text-decoration: none; }
+.nav a:hover { color: #ffffff; background: rgba(255,255,255,0.03); }
+
+/* nav-link base class used with NavLink */
+.nav-link { text-decoration: none; color: rgba(255,255,255,0.92); display:inline-block; padding:6px 10px; border-radius:8px; }
+.nav-link:hover { background: rgba(255,255,255,0.03); color: #fff; }
+
+/* active page styling: white rounded background, black text */
+.nav-link.active {
+  background: #ffffff;
+  color: #000000 !important;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+/* if CTA (Contact) is active, keep solid look but invert colors */
+.nav-link.btn.active {
+  background: #ffffff;
+  color: #000000 !important;
+}
+
+/* Hero (glass card) */
+.hero { display:flex; align-items:center; justify-content:center; padding:5.5rem 0 6.5rem; }
+.hero-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  padding: 44px;
+  width: 100%;
+  max-width: 980px;
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(6px) saturate(110%);
+}
+.hero-card h1 { margin:0 0 6px 0; font-size:28px; color:var(--text); }
+.hero-card p { margin:0 0 16px 0; color:var(--muted); line-height:1.6; }
+
+/* Buttons: minimalist outline / filled subtle */
+.btn {
+  background: #000000; /* primary button black */
+  color: #ffffff; /* button text white */
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn:hover { background: #111111; }
+/* ensure links styled as buttons don't show underlines */
+.btn, .btn.secondary, .btn.inverted { text-decoration: none !important; }
+
+/* secondary/outline button variant (transparent) */
+.btn.secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.btn.secondary:hover { background: rgba(0,0,0,0.03); }
+
+/* inverted variant for dark headers (white background, black text) */
+.btn.inverted {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.btn.inverted:hover { background: #f8f8f8; }
+
+.feature, .service-card {
+  /* unify card styling across the site to light glassmorphism */
+  background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.88));
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--card-shadow);
+  color: var(--text);
+}
+
+/* make feature/service cards look more glassy and lift on hover */
+.feature, .service-card, .glass-card {
+  backdrop-filter: blur(6px) saturate(120%);
+  transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms cubic-bezier(.2,.9,.2,1), border-color 220ms ease, background 220ms ease;
+  will-change: transform, box-shadow;
+}
+
+.feature:hover, .service-card:hover, .glass-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(10,10,10,0.08);
+  border-color: rgba(0,0,0,0.09);
+  cursor: pointer;
+}
+
+/* keyboard focus for accessibility */
+.feature:focus-visible, .service-card:focus-visible, .glass-card:focus-visible {
+  outline: 3px solid rgba(10,10,10,0.06);
+  outline-offset: 4px;
+}
+
+table { color: var(--muted); }
+
+.header {
+  /* translucent header (dark glass) */
+  background: rgba(0,0,0,0.72);
+  -webkit-backdrop-filter: blur(8px) saturate(110%);
+  backdrop-filter: blur(8px) saturate(110%);
+  position: sticky; top: 0; z-index: 60; padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.footer {
+  background: rgba(255,255,255,0.04);
+  -webkit-backdrop-filter: blur(6px) saturate(110%);
+  backdrop-filter: blur(6px) saturate(110%);
+  color: var(--muted);
+  padding:3rem 0 5rem;
+  border-top: 1px solid rgba(0,0,0,0.04);
+}
+
+/* Reusable light glass card for feature lists */
+.glass-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.80));
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 6px 20px rgba(10,10,10,0.06);
+  color: var(--text);
+}
+
+.glass-card h3 { margin: 0 0 8px 0; font-size: 18px; color: var(--text); }
+.glass-card p { margin: 0; color: var(--muted); line-height: 1.5; }
+
+@media (max-width:768px) { .hero { padding:3rem 0; } .hero-card { padding:22px; } .hero-card h1 { font-size:20px; } }
+
+/* Cover hero styles for homepage */
+.cover-hero {
+  /* remove top padding so hero sits flush under the sticky header */
+  min-height: 72vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0 0 6rem; /* flush to header */
+}
+
+/* Ensure homepage cover hero has no top margin/padding when it's the first section */
+.page > .cover-hero { padding-top: 0; margin-top: 0; }
+
+/* Pull the whole cover hero up beneath the sticky header so there is no visible seam */
+.page > .cover-hero {
+  margin-top: calc(var(--header-height) * -1);
+  padding-top: calc(var(--header-height));
+}
+
+.cover-left {
+  max-width: 760px; /* allow slightly wider hero text */
+  padding-left: 12px; /* subtle left padding so text isn't flush to container edge */
+  position: relative;
+}
+
+.cover-title {
+  font-size: 44px;
+  line-height: 1.04;
+  margin-bottom: 16px;
+  color: #000000; /* stronger black for improved contrast */
+  font-weight: 700;
+  /* subtle text shadow to improve legibility over decorative background without adding a box */
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6), 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.cover-sub {
+  color: rgba(0,0,0,0.72); /* darker lead text for readability */
+  font-size:18px;
+  margin-bottom:24px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.55), 0 6px 18px rgba(0,0,0,0.05);
+}
+
+.cover-cta { display:flex; gap:12px; align-items:center; }
+
+@media (max-width:768px) {
+  .cover-hero { padding:4rem 0; min-height: 56vh; }
+  .cover-title { font-size:28px; }
+  .cover-left { padding-left: 8px; max-width: 100%; }
+}
+
+/* Two-column layout for lists in Technology page */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+.two-col .col h4 { margin: 0 0 8px 0; color: var(--text); }
+
+.validated-list, .extensible-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: var(--muted);
+}
+.validated-list li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 0.6rem;
+}
+.validated-list li::before {
+  content: '✔';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #000000; /* black checkmark */
+  font-size: 14px;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+
+/* Technology page cards and headings */
+.tech-card {
+  /* stronger translucent glass panel */
+  background: rgba(255,255,255,0.48);
+  -webkit-backdrop-filter: blur(12px) saturate(130%);
+  backdrop-filter: blur(12px) saturate(130%);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 12px 40px rgba(10,10,10,0.06);
+  color: var(--text);
+}
+
+.tech-card {
+  transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms cubic-bezier(.2,.9,.2,1), border-color 220ms ease;
+  will-change: transform, box-shadow;
+}
+
+.tech-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(10,10,10,0.08);
+  border-color: rgba(0,0,0,0.08);
+}
+
+.tech-card:focus-visible {
+  outline: 3px solid rgba(10,10,10,0.06);
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .tech-card:hover { transform: translateY(-4px); }
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 12px 0;
+  padding-left: 8px;
+  border-left: 4px solid rgba(0,0,0,0.06);
+}
+
+.tech-card p, .tech-card ul { color: var(--muted); }
+
+.tech-card code {
+  background: rgba(0,0,0,0.03);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 90%;
+}
+
+.tech-divider {
+  height: 1px;
+  background: rgba(0,0,0,0.04);
+  margin: 14px 0;
+}
+
+.extensible-list li::before, .validated-list li::before, .tech-card ul li::before {
+  /* ensure other lists have a subtle bullet if needed */
+  content: '';
+}
+
+/* Section header with small icon */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.section-icon svg {
+  width: 20px;
+  height: 20px;
+  color: var(--text);
+  flex: 0 0 20px;
+}
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+}
+
+/* decorative background image behind hero content */
+.cover-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('./assets/circuit.svg');
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: cover;
+  opacity: 0.06; /* very low opacity */
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cover-hero .container { position: relative; z-index: 5; }
+
+/* Place the hero artwork behind the entire cover region (between header and
+   the section boundary) so the image fills the full-bleed area and isn't
+   constrained to the glass text card. Keep the translucent glass panel above
+   the artwork. */
+.cover-hero {
+  background-image: url('./assets/hero-npu.svg'), linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.06));
+  background-repeat: no-repeat, no-repeat;
+  background-position: center right, center center;
+  background-size: cover, cover;
+}
+
+/* ensure hero-card (translucent white) sits above decorative image */
+.cover-left .hero-card { background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.88)); border-radius: var(--radius); box-shadow: var(--card-shadow); padding: 32px; border: 1px solid var(--glass-border); }
+
+/* hero-panel uses the same translucent glass tokens but remove extra margins */
+.hero-panel { padding: 32px; margin: 0; }
+
+/* full-bleed hero panel that spans viewport width and feels integrated */
+.hero-panel.full-bleed {
+  /* absolutely cover the parent .cover-hero so the glass panel matches the
+     full-bleed cover area exactly (full width and exact cover height). The
+     parent `.cover-hero` must remain `position: relative` for this to work. */
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  width: 100%;
+  border: none; /* remove border per request */
+  border-radius: 0; /* full-bleed aligns to edges */
+  box-shadow: 0 14px 50px rgba(10,10,10,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0; /* container will provide internal spacing */
+  z-index: 6; /* ensure panel sits above cover background */
+  overflow: hidden;
+}
+
+/* Ensure headings and lead text inside the cover don't introduce extra top margins that
+   could cause a visible seam beneath the header */
+.cover-left h1, .cover-title { margin-top: 0; }
+.cover-left p, .cover-sub { margin-top: 0; }
+
+/* ensure hero content keeps left padding on small screens */
+.hero-panel.full-bleed .container { padding-left: 20px; padding-right: 20px; }
+
+/* make hero more translucent and cloudy */
+.hero-panel.full-bleed {
+  /* slightly more translucent: reduce white alpha a bit so the artwork
+    shows through more, while keeping the band bright */
+  background: linear-gradient(180deg, rgba(255,255,255,0.80), rgba(255,255,255,0.76));
+  -webkit-backdrop-filter: blur(14px) saturate(135%);
+  backdrop-filter: blur(14px) saturate(135%);
+}
+
+.hero-panel.full-bleed::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* stronger layered radial gradients to create a cloudy texture */
+  background-image:
+    radial-gradient(circle at 25% 30%, rgba(255,255,255,0.06), transparent 22%),
+    radial-gradient(circle at 75% 70%, rgba(255,255,255,0.05), transparent 20%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' preserveAspectRatio='none'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03' /></svg>");
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-size: cover, cover, 200px 200px;
+  pointer-events: none;
+  z-index: 4;
+  /* lower overlay opacity further so the band is more translucent */
+  mix-blend-mode: normal;
+  opacity: 0.32;
+}
+
+.hero-panel.full-bleed .container { position: relative; z-index: 6; display:flex; align-items:center; width:100%; padding-left: 20px; padding-right: 20px; }
+
+/* Centered minimal hero (typographic) for interior pages */
+.center-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 0 3rem; /* no top gap so hero sits flush under header */
+  min-height: 42vh;
+  background: transparent; /* keep minimalist */
+  position: relative; /* for decorative pseudo-element */
+}
+.center-hero .container { position: relative; z-index: 2; }
+.center-hero h1 {
+  font-size: 36px;
+  margin: 0 0 12px 0;
+  color: var(--text);
+  font-weight: 700;
+}
+.center-hero p {
+  margin: 0 auto;
+  max-width: 880px;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* subtle decorative noise/cloud overlay for interior heroes */
+.center-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  /* faint cool tint on top, then soft clouds and a coarser, stronger grain */
+  background-image:
+    linear-gradient(180deg, rgba(12,40,80,0.035), rgba(12,40,80,0.02)),
+    radial-gradient(circle at 20% 25%, rgba(255,255,255,0.10), transparent 22%),
+    radial-gradient(circle at 80% 75%, rgba(255,255,255,0.08), transparent 20%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220' preserveAspectRatio='none'><filter id='t'><feTurbulence baseFrequency='0.45' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23t)' opacity='0.22' /></svg>");
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+  /* larger tile-size for coarser grain and broader cloud shapes */
+  background-size: cover, cover, cover, 220px 220px;
+  opacity: 1;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  /* tighten header and increase tap targets */
+  .header { padding: 10px 0; }
+  .header .container { padding: 0 14px; }
+  .logo { font-size: 16px; }
+
+  /* make nav horizontally scrollable on small screens and larger touch targets */
+  .nav { display: flex; gap: 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+  /* hide desktop nav on mobile; hamburger will control mobile nav */
+  .desktop { display: none; }
+  .hamburger { display: inline-flex; }
+  .nav a, .nav-link { padding: 10px 14px; font-size: 15px; }
+
+  /* hero adjustments */
+  .cover-hero { min-height: 56vh; padding: 2.5rem 0 3rem; }
+  .hero-panel.full-bleed { position: absolute; inset: 0; }
+  .hero-panel.full-bleed .container { padding-left: 16px; padding-right: 16px; }
+  .cover-title { font-size: 28px; }
+  .cover-sub { font-size: 15px; }
+
+  /* CTA buttons stack on mobile and expand to full width */
+  .cover-cta { flex-direction: column; gap: 12px; align-items: stretch; }
+  .cover-cta .btn { width: 100%; justify-content: center; padding: 12px 16px; }
+
+  /* features single column */
+  .features { grid-template-columns: 1fr; gap: 1rem; }
+
+  /* increase form inputs tappable area */
+  .form-group input, .form-group textarea { padding: 12px; font-size: 16px; }
+
+  /* ensure any inline images scale down */
+  img { max-width: 100%; height: auto; display: block; }
+
+  /* reduce excessive shadows for small screens */
+  .hero-panel.full-bleed, .glass-card, .feature, .service-card { box-shadow: 0 8px 24px rgba(10,10,10,0.06); }
+}
+
+@media (max-width: 480px) {
+  .header .container { padding: 0 12px; }
+  .logo { font-size: 15px; }
+  .cover-hero { min-height: 48vh; }
+  .cover-title { font-size: 22px; }
+  .cover-sub { font-size: 14px; }
+  .nav a, .nav-link { font-size: 14px; padding: 10px 12px; }
+}
+
+/* Hamburger and mobile nav styles */
+.hamburger {
+  display: none; /* visible on small screens via media query */
+  background: transparent;
+  border: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.hamburger .bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: rgba(255,255,255,0.92);
+  margin: 3px 0;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+.hamburger.active .top { transform: translateY(6px) rotate(45deg); }
+.hamburger.active .middle { opacity: 0; }
+.hamburger.active .bottom { transform: translateY(-6px) rotate(-45deg); }
+
+.mobile-nav {
+  position: absolute;
+  top: calc(var(--header-height));
+  left: 0;
+  right: 0;
+  background: rgba(255,255,255,0.98);
+  z-index: 70;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  padding: 12px 16px 18px;
+  box-shadow: 0 10px 30px rgba(10,10,10,0.06);
+}
+.mobile-nav .nav.mobile { display:flex; flex-direction: column; gap: 8px; }
+.mobile-nav .nav.mobile a { color: var(--text); padding: 10px 12px; border-radius: 8px; }
+
+@media (min-width: 769px) {
+  .hamburger { display: none; }
+}
+
+/* Pull interior centered heroes up under the sticky header the same way the
+   cover hero is pulled up so there's no seam on interior pages. This overrides
+   the general `.page > .section` spacing when a `.center-hero` is the first
+   child of `.page`. */
+.page > .center-hero {
+  margin-top: calc(var(--header-height) * -1);
+  padding-top: calc(var(--header-height));
+}
+
+/* Debugging helpers: enabled by adding `?debug=1` to the URL or setting
+   `localStorage.debug-hero = '1'`. These visually outline header/hero areas and
+   add a subtle background so you can see any seam. Remove when finished. */
+/* debug helpers removed */
+

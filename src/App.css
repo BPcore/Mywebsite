@@ -1,0 +1,34 @@
+.App { min-height: 100vh; display:flex; flex-direction:column; }
+
+.main-content { flex:1; }
+
+/* Header tweaks to match preview */
+.header .container { display:flex; justify-content:space-between; align-items:center; }
+
+.nav { display:flex; gap:12px; list-style:none; align-items:center; }
+
+/* Page sections */
+.page { padding: 0 0 3.5rem; /* no top padding so hero can sit flush under sticky header */ }
+
+/* add top spacing to the main section when present so pages without a hero keep vertical rhythm */
+.page > .section { padding-top: 3.5rem; }
+
+/* Hero card */
+.hero { display:flex; align-items:center; justify-content:center; }
+.hero-card { text-align:left; }
+
+.section h2 { text-align:left; margin-bottom:1.25rem; color:var(--text); }
+
+.features { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; margin-top:1rem; }
+
+.feature { text-align:left; }
+
+.service-card { transition: transform 0.18s ease; }
+.service-card:hover { transform: translateY(-6px); }
+
+.form-group input, .form-group textarea { background: transparent; border: 1px solid rgba(0,0,0,0.08); color: var(--text); }
+
+@media (max-width:768px) {
+  .page { padding: 2rem 0; }
+  .features { grid-template-columns: 1fr; }
+}
