@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 
 const Header: React.FC = () => {
@@ -9,6 +9,34 @@ const Header: React.FC = () => {
   useEffect(() => {
     setOpen(false);
   }, [location.pathname]);
+
+  // lock body scroll when mobile menu is open and handle ESC to close
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [open]);
+
+  // keep a ref to the mobile nav to focus when opened (basic focus management)
+  const mobileNavRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    if (open && mobileNavRef.current) {
+      // focus the first link inside mobile nav for keyboard users
+      const first = mobileNavRef.current.querySelector('a');
+      (first as HTMLElement | null)?.focus?.();
+    }
+  }, [open]);
 
   return (
     <header className="header">
@@ -45,7 +73,7 @@ const Header: React.FC = () => {
 
         {/* Mobile nav overlay (visible when open) */}
         {open && (
-          <nav id="mobile-nav" className="mobile-nav" aria-hidden={!open}>
+          <nav id="mobile-nav" ref={mobileNavRef as any} className={`mobile-nav ${open ? 'open' : ''}`} aria-hidden={!open} role="navigation" aria-label="Mobile navigation">
             <ul className="nav mobile">
               <li><NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink></li>
               <li><NavLink to="/technology" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Technology</NavLink></li>
